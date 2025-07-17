@@ -5,8 +5,14 @@ screen = Tk()
 def conversion():
     weight = float(wei.get())
     gra = weight * 1000
+    pou = weight * 2.2
+    ounc = weight * 35.274
     t1.delete("1.0", END)
     t1.insert(END, gra)
+    t2.delete("1.0", END)
+    t2.insert(END, pou)
+    t3.delete("1.0", END)
+    t3.insert(END, ounc)
 
 l1 = Label(screen, text = "Enter the weight in kg:", font = ("courgette", 30))
 l2 = Label(screen, text = "gram",font = ("courgette", 20))
