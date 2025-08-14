@@ -1,20 +1,42 @@
 from tkinter import *
-
+from tkinter.filedialog import *
 screen = Tk()
 #screen.geometry("800x400")
+def add():
+    info = ent.get()
+    list.insert(END, info)
+    ent.delete(0, END)
 
-save = Button(screen, text = "Save", font = ("courgette", 15))
+def dele():
+    ite = list.curselection()
+    list.delete(ite)
+
+def sav():
+    sa = asksaveasfile(defaultextension = ".txt")
+
+    for i in list.get(0, END):
+        print(i.strip(), file = sa)
+    list.delete(0, END)
+
+def ope():
+    op = askopenfile(title = "open file")
+    list.delete(0, END)
+    line = op.readlines()
+    for i in line:
+        list.insert(END, i.strip())
+
+save = Button(screen, text = "Save", font = ("courgette", 15), command = sav)
 save.pack(side = LEFT, padx = 5, pady = 5)
 
 
 
-add = Button(screen, text = "Add", font = ("courgette", 15))
+add = Button(screen, text = "Add", font = ("courgette", 15), command = add)
 add.pack(side = RIGHT, padx = 5, pady = 5)
 
-open = Button(screen, text = "Open", font = ("courgette", 15))
+open = Button(screen, text = "Open", font = ("courgette", 15), command = ope)
 open.pack( padx = 5, pady = 5)
 
-delete = Button(screen, text = "Delete", font = ("courgeette", 15))
+delete = Button(screen, text = "Delete", font = ("courgeette", 15), command = dele)
 delete.pack(padx = 5, pady = 5)
 
 ent = Entry(screen, width = 20)
@@ -30,6 +52,8 @@ for i in range(1, 50):
 list.pack(side = LEFT, padx = 5)
 scroll.config(command = list.yview)
 verti.pack(side = RIGHT, padx = 5)
+
+
 
 
 
