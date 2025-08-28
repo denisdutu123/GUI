@@ -25,15 +25,15 @@ second.place(x = 200, y = 90)
 
 def timer():
     global hou, minu, sec
-    numsec = int(hou.get() * 3600) + int(minu.get() * 60) + int(sec.get())
+    numsec = int(hou.get()) * 3600 + int(minu.get()) * 60 + int(sec.get())
     while numsec > -1:
-        minu, sec = divmod(numsec, 60)
-        hou = 0
-        if minu > 60:
-            hou, minu = divmod(minu, 60)
-        hour.set("{00:2d}".format(hou))
-        minute.set("{00:2d}".format(minu))
-        second.set("{00:2d}".format(sec))
+        minut, se = divmod(numsec, 60)
+        ho = 0
+        if minut > 60:
+            ho, minut = divmod(minut, 60)
+        hou.set("{00:2d}".format(ho))
+        minu.set("{00:2d}".format(minut))
+        sec.set("{00:2d}".format(se))
         screen.update()
         time.sleep(1)
         numsec -=1        
