@@ -43,8 +43,9 @@ tim = Label(screen, text = "11:30 / 29 Aug", font = ("courgette", 15), fg = "Lig
 tim.place(x = 210, y = 100)
 
 def perso():
-    scr = Tk()
+    scr = Toplevel(screen)
     scr.geometry("600x700")
+    
     
     def detail():
         use = ema.get()
@@ -96,7 +97,7 @@ personal = Button(screen, text = "Account", font =  ("courgette", 15), bg = "Whi
 personal.place(x = 450, y = 80)
 
 def sched():
-    scrr = Tk()
+    scrr = Toplevel(screen)
     scrr.geometry("600x700")
     canvas = Canvas(scrr, width = 550, height = 620)
     canvas.pack(side = LEFT, fill = BOTH, expand = True)
@@ -125,14 +126,14 @@ def sched():
     ra7 = Label(fra, text = "Emilia-Romagna Grand Prix: 16 May / Practice 1 \n 16 May / Practice 2 \n 17 May / Practice 3 \n 17 May/ Qualifying \n 18 May / Race", font = ("courgette", 9), bg = "Dark Grey")
     ra7.place(x = 20, y = 445)
     #scroll.config(command = )
-    fra.pack(side = RIGHT)
+    #fra.pack(side = RIGHT)
     
 
 schedule = Button(screen, text = "Schedule", font = ("courgette", 15), command = sched)
 schedule.place(x = 150, y = 600)
 
 def res():
-    scrrr = Tk()
+    scrrr = Toplevel(screen)
     scrrr.geometry("600x700")
 
 results = Button(screen, text = "Results", font = ("courgette", 15), command = res)
