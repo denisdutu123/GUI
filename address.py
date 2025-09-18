@@ -15,11 +15,12 @@ screen.title("Address Book")
 
 def ope():
     global ke
+    res()
     titl = askopenfile(title = "Files")
     if titl:
-        rea = ast.literal_eval(titl.read())
+        ke = ast.literal_eval(titl.read())
         
-        for i in rea.keys():
+        for i in ke.keys():
             lis.insert(END, i)
         addr.configure(text = os.path.basename(titl.name))
     else:
@@ -32,15 +33,16 @@ def res():
     emaent.delete(0, END)
     birthent.delete(0, END)
     lis.delete(0, END)
-    ke.delte(0, END)
     addr.configure(text = "My Address Book")
+    
 
 def disp(event):
+    global ke
     scr = Toplevel(screen)
     inde = lis.curselection()
     inf = ""
     if inde:
-        key = lis.get(inde)
+        key = lis.get(inde[0])
         inf = "Name:" + key + "\n"
         inff = ke[key]
         inf += "Address:" + inff[0] + "\n"
@@ -50,6 +52,54 @@ def disp(event):
     di = Label(scr)
     di.grid(row = 0, column = 0)
     di.configure(text = inf)
+    
+def upd():
+    key = naent.get()
+    if key == "":
+        messagebox.showerror("Missing information", "Please review your entries")
+    else:
+        if key not in ke.keys():
+            lis.insert(END, key)
+        ke[key] = (addent.get(), mobent.get(), birthent.get(), emaent.get())
+        clea()
+        
+def clea():
+    naent.delete(0, END)
+    addent.delete(0, END)
+    mobent.delete(0, END)
+    birthent.delete(0, END)
+    emaent.delete(0, END)
+
+def sav():
+    tex = asksaveasfile(defaultextension = ".txt")
+    if tex:
+        print(ke, file = tex)
+        res()
+    else:
+        messagebox.showerror("File is not saved", "Please save ")
+
+def edi():
+    clea()
+    inde = lis.curselection()
+    if inde:
+        naent.insert(0, lis.get(inde))
+        deta = ke[naent.get()]
+        addent.insert(0, deta[0])
+        mobent.insert(0, deta[1])
+        emaent.insert(0, deta[2])
+        birthent.insert(0, deta[3])
+    else:
+        messagebox.showerror("Name error", "Please enter a name")
+
+def dele():
+    inde = lis.curselection()
+    if inde:
+        del ke[lis.get(inde)]
+        lis.delete(inde)
+        clea()
+    else:
+        messagebox.showerror("Name error", "Please enter a name")
+        
         
     
     
@@ -95,16 +145,16 @@ birthday.place(x = 305, y = 250)
 birthent = Entry(screen, width = 15, font = ("courgette", 17))
 birthent.place(x = 400, y = 250)
 
-edit = Button(screen, text = "Edit", font = ("courgette", 17))
+edit = Button(screen, text = "Edit", font = ("courgette", 17), command = edi)
 edit.place(x = 50, y = 500)
 
-delete = Button(screen, text = "Delete", font = ("courgette", 17))
+delete = Button(screen, text = "Delete", font = ("courgette", 17), command = dele)
 delete.place(x = 150, y = 500)
 
-save = Button(screen, width = 30, text = "Save", font = ("courgette", 17))
+save = Button(screen, width = 30, text = "Save", font = ("courgette", 17), command = sav)
 save.place(x = 85, y = 590)
 
-update = Button(screen, text = "Update/Add", font = ("courgette", 17))
+update = Button(screen, text = "Update/Add", font = ("courgette", 17), command = upd)
 update.place(x = 400, y = 500)
 
 
